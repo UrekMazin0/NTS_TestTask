@@ -64,12 +64,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DLA\Implementation\DBConnection.cs" />
-    <Compile Include="DLA\Interfaces\IGenericRepository.cs" />
-    <Compile Include="DLA\Interfaces\IPriceRepository.cs" />
-    <Compile Include="DLA\Interfaces\IProductRepository.cs" />
-    <Compile Include="DLA\Model\Price.cs" />
-    <Compile Include="DLA\Model\Product.cs" />
+    <Compile Include="DAL\Implementation\DBConnection.cs" />
+    <Compile Include="DAL\Implementation\PriceDAL.cs" />
+    <Compile Include="DAL\Implementation\ProductDAL.cs" />
+    <Compile Include="DAL\Interfaces\IGenericRepository.cs" />
+    <Compile Include="DAL\Interfaces\IPriceRepository.cs" />
+    <Compile Include="DAL\Interfaces\IProductRepository.cs" />
+    <Compile Include="DAL\Model\Price.cs" />
+    <Compile Include="DAL\Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

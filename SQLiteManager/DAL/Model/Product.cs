@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQLiteManager.DLA.Model
+namespace SQLiteManager.DAL.Model
 {
-	class Product
+	public class Product
 	{
 		public int      id       { get; set; }
 		public int      id_price { get; set; }
@@ -19,12 +19,12 @@ namespace SQLiteManager.DLA.Model
 		public string   color    { get; set; }
 		public string   size     { get; set; }
 		public string   weight   { get; set; }
-		public DateTime datetime { get; set; }
+		public DateTime date_changes { get; set; }
 
 		public override string ToString()
 		{
-			return $"{id} : {price_id} : {code} : {name} : {bar_code} : {quantity} : " +
-				   $"{model} : {sort} : {color} : {size} : {weight} : {datetime}";
+			return $"{id} : {id_price} : {code} : {name} : {bar_code} : {quantity} : " +
+				   $"{model} : {sort} : {color} : {size} : {weight} : {date_changes}";
 		}
 	}
 }

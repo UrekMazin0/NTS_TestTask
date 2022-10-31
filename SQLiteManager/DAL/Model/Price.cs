@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQLiteManager.DLA.Model
+namespace SQLiteManager.DAL.Model
 {
-	class Price
+	public class Price
 	{
 		public int     id	 { get; set; }
 		public decimal price { get; set; }

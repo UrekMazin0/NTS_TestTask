@@ -1,5 +1,5 @@
-﻿using SQLiteManager.DLA.Interfaces;
-using SQLiteManager.DLA.Model;
+﻿using SQLiteManager.DAL.Interfaces;
+using SQLiteManager.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 
-namespace SQLiteManager.DLA.Implementation
+namespace SQLiteManager.DAL.Implementation
 {
-	class ProductDAL : IProductRepository
+	public class ProductDAL : IProductRepository
 	{
 		public async Task<int> AddAsync(Product entity)
 		{
@@ -74,7 +74,7 @@ namespace SQLiteManager.DLA.Implementation
 		{
 			var query = $"UPDATE products " +
 						$"SET code = @code, name = @name, bar_code = @bar_code, quantity = @quantity, model = @model, sort = @sort, color = @color, " +
-						$"	  size = @size, weight = @weight, DATETIME('now'), id_price = @id_price "+
+						$"	  size = @size, weight = @weight, date_changes = DATETIME('now'), id_price = @id_price "+
 						$"WHERE id = @id;";
 
 			using (var connection = DBConnection.CreateConnection())

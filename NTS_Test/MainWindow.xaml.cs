@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 using System.Diagnostics;
-using SQLiteManager.DLA.Implementation;
+using SQLiteManager.DAL.Implementation;
+using SQLiteManager;
 
 namespace NTS_Test
 {
@@ -25,8 +27,22 @@ namespace NTS_Test
 	{
 		public MainWindow()
 		{
-			Trace.WriteLine("DB FILE : " + DBConnection.DbFile);
+			try
+			{
+				var dal = new ProductDAL();
+				var p = dal.GetByIdAsync(5);
+				Trace.WriteLine("PRODUCT : " + p.Result);
+			}
+			catch (Exception ex)			
+			{
+				Trace.WriteLine(ex.Message);
+			}
 			InitializeComponent();
+		}
+
+		private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+
 		}
 	}
 }
