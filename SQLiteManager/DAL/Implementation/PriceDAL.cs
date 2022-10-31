@@ -1,5 +1,5 @@
-﻿using SQLiteManager.DLA.Interfaces;
-using SQLiteManager.DLA.Model;
+﻿using SQLiteManager.DAL.Interfaces;
+using SQLiteManager.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 
-namespace SQLiteManager.DLA.Implementation
+namespace SQLiteManager.DAL.Implementation
 {
-	class PriceDAL : IPriceRepository
+	public class PriceDAL : IPriceRepository
 	{
 		public async Task<int> AddAsync(Price entity)
 		{

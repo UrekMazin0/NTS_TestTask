@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQLiteManager.DLA.Implementation
+namespace SQLiteManager.DAL.Implementation
 {
 	public static class DBConnection
 	{
@@ -28,8 +28,7 @@ namespace SQLiteManager.DLA.Implementation
 
 		public static SQLiteConnection CreateConnection()
 		{
-			return new SQLiteConnection("Data Source=" + DbFile +
-										"");
+			return new SQLiteConnection("Data Source=" + DbFile + ";");
 		}
 	}
 }
