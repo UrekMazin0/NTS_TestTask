@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Diagnostics;
+using SQLiteManager.DLA.Implementation;
+
 namespace NTS_Test
 {
 	/// <summary>
@@ -22,6 +25,7 @@ namespace NTS_Test
 	{
 		public MainWindow()
 		{
+			Trace.WriteLine("DB FILE : " + DBConnection.DbFile);
 			InitializeComponent();
 		}
 	}
