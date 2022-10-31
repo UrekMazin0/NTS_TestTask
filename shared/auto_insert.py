@@ -7,7 +7,7 @@ import random
 import sqlite3
 
 # defines
-database_file = 'ntsDB.db'
+database_file = './database/ntsDB.db'
 row_count = 1000
 
 def create_connection(db_file):
@@ -29,7 +29,7 @@ def insert_price(conn, price):
     return cur.lastrowid
 
 def insert_product(conn, product):
-    sql = """INSERT INTO products(code, name, bar_code, quantity, model, sort, color, size, wight, date_changes, id_price)
+    sql = """INSERT INTO products(code, name, bar_code, quantity, model, sort, color, size, weight, date_changes, id_price)
              VALUES (?,?,?,?,?,?,?,?,?, DATETIME('now'),?);"""
     cur = conn.cursor()
     cur.execute(sql, product)
@@ -63,7 +63,8 @@ def get_random_product():
         model += random.choice(model_pieces)
 
     # sort
-    sort = 'None'
+    sort_pieces = ('1', '2', '3')
+    sort = random.choice(sort_pieces)
 
     # color 
     colors = ('White', 'Red', 'Blue', 'Green', 'Black', 'Yellow', 'Brown', 'Grey')
@@ -73,8 +74,8 @@ def get_random_product():
     sizes = ('Small', 'Medium', 'Large')
     size = random.choice(sizes)
 
-    # wight
-    wight = 'None'
+    # weight
+    weight = round(random.uniform(1.0, 100.0), 3)
 
     # id_price
     id_price = random.randint(1, 5)
@@ -88,7 +89,7 @@ def get_random_product():
     product_list.append(sort)
     product_list.append(color)
     product_list.append(size)
-    product_list.append(wight)
+    product_list.append(weight)
     product_list.append(id_price)
 
     return tuple(product_list)
