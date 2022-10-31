@@ -9,7 +9,7 @@ namespace SQLiteManager.DLA.Model
 	class Product
 	{
 		public int      id       { get; set; }
-		public int      price_id { get; set; }
+		public int      id_price { get; set; }
 		public int		code     { get; set; }
 		public string   name     { get; set; }
 		public string   bar_code { get; set; }
