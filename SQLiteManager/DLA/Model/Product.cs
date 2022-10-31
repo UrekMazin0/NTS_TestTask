@@ -10,7 +10,7 @@ namespace SQLiteManager.DLA.Model
 	{
 		public int      id       { get; set; }
 		public int      price_id { get; set; }
-		public int	    code     { get; set; }
+		public int		code     { get; set; }
 		public string   name     { get; set; }
 		public string   bar_code { get; set; }
 		public decimal  quantity { get; set; }
@@ -18,13 +18,13 @@ namespace SQLiteManager.DLA.Model
 		public string   sort     { get; set; }
 		public string   color    { get; set; }
 		public string   size     { get; set; }
-		public string   wight    { get; set; }
+		public string   weight   { get; set; }
 		public DateTime datetime { get; set; }
 
 		public override string ToString()
 		{
 			return $"{id} : {price_id} : {code} : {name} : {bar_code} : {quantity} : " +
-				   $"{model} : {sort} : {color} : {size} : {wight} : {datetime}";
+				   $"{model} : {sort} : {color} : {size} : {weight} : {datetime}";
 		}
 	}
 }
