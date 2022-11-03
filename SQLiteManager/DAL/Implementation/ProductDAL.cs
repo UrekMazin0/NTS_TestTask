@@ -86,5 +86,19 @@ namespace SQLiteManager.DAL.Implementation
 				return result;
 			}
 		}
+
+		public async Task<IReadOnlyList<Product>> GetByLimitAsync(int limit)
+		{
+			var query = $"SELECT * FROM products LIMIT {limit}";
+
+			using (var connection = DBConnection.CreateConnection())
+			{
+				connection.Open();
+				var result = await connection.QueryAsync<Product>(query)
+											 .ConfigureAwait(false);
+
+				return result.AsList<Product>();
+			}
+		}
 	}
 }

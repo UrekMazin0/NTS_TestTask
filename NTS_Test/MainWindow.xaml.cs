@@ -12,31 +12,80 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using SQLiteManager.DAL.Implementation;
 using SQLiteManager;
+using SQLiteManager.DAL.Model;
+using NTS_Test.Pages;
 
 namespace NTS_Test
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
+        private DataGridPage _dataGridPage;
+        private SearchPage   _seatchPage;
+        private AboutPage    _aboutPage;
+
 		public MainWindow()
 		{
-			try
-			{
-				var dal = new ProductDAL();
-				var p = dal.GetByIdAsync(5);
-				Trace.WriteLine("PRODUCT : " + p.Result);
-			}
-			catch (Exception ex)			
-			{
-				Trace.WriteLine(ex.Message);
-			}
 			InitializeComponent();
+            LoadContent();
+            
+            MainView.Content = _dataGridPage;
+
+			var dal = new ProductDAL();
+            var data = dal.GetByLimitAsync(100);
+
+			var products = new ObservableCollection<Product>();
+			foreach (var item in data.Result)
+			{
+                products.Add(item);
+			}
+
+			_dataGridPage.productsDataGrid.ItemsSource = products;
+		}
+
+        private bool IsMaximize = false;
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (IsMaximize)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 1080;
+                    this.Height = 720;
+
+                    IsMaximize = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    IsMaximize = true;
+                }
+            }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+            Application.Current.Shutdown();
+        }
+
+        private void LoadContent()
+        {
+            _dataGridPage = new DataGridPage();
+            _seatchPage = new SearchPage();
+            _aboutPage = new AboutPage();
 		}
 	}
 }
