@@ -24,15 +24,20 @@ namespace NTS_Test
 	public partial class MainWindow : Window
 	{
         private DataGridPage _dataGridPage;
-        private SearchPage   _seatchPage;
+        private SearchPage   _searchPage;
         private AboutPage    _aboutPage;
+        private Page _currentPage = null;
+
+        private Button _currentButton = null;
 
 		public MainWindow()
 		{
 			InitializeComponent();
             LoadContent();
-            
-            MainView.Content = _dataGridPage;
+
+            SwitchSelectedButton(dataGridPageSwitchButton);
+            SwitchFrame(_dataGridPage);
+            MainView.Content = _currentPage;
 
 			var dal = new ProductDAL();
             var data = dal.GetByLimitAsync(100);
@@ -76,16 +81,67 @@ namespace NTS_Test
             }
         }
 
-		private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void SwitchFrame_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button == _currentButton || button == null)
+                return;
+
+            SwitchSelectedButton(button);
+
+            switch (button.Name)
+			{
+                case "dataGridPageSwitchButton":
+                    SwitchFrame(_dataGridPage);
+                    break;
+                case "searchPageSwitchButton":
+                    SwitchFrame(_searchPage);
+                    break;
+                case "aboutPageSwitchButton":
+                    SwitchFrame(_aboutPage);
+                    break;
+                default:
+					break;
+			}
+		}
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
             Application.Current.Shutdown();
         }
 
+        private void SwitchFrame(Page page)
+        {
+            if (_currentPage == page)
+                return;
+
+            _currentPage = page;
+            MainView.Content = _currentPage;
+		}
+
         private void LoadContent()
         {
             _dataGridPage = new DataGridPage();
-            _seatchPage = new SearchPage();
+            _searchPage = new SearchPage();
             _aboutPage = new AboutPage();
 		}
+
+        private void SwitchSelectedButton(Button b)
+        {
+            if (b == null)
+                return;
+
+            if (_currentButton != null)
+            {
+                _currentButton.Background = Brushes.Transparent;
+                _currentButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD0, 0xC0, 0xFF)); // #D0C0FF
+            }
+
+            _currentButton = b;
+
+            _currentButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x7B, 0x5C, 0xD6)); // #7B5CD6
+            _currentButton.Foreground = Brushes.White;
+        }
 	}
 }

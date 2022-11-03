@@ -24,12 +24,8 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
-				<!--Menu Icon-->
-				<Grid>
-					
-				</Grid>
 
-				<Border Grid.Row="1" Background="#623ED0" CornerRadius="0 30 0 30">
+					<Border Grid.Row="1" Background="#623ED0" CornerRadius="0 30 0 30">
 					<DockPanel>
 
 						<!--Menu Titles-->
@@ -39,24 +35,23 @@
 						<Separator Margin="25" Background="#7E5FDC" DockPanel.Dock="Top" Height="0.8"/>
 
 						<!--Menu Buttons-->
+						<!--Background="#7B5CD6" Foreground="White"-->
 						<StackPanel DockPanel.Dock="Top" >
-							
-							<!--Data Grid Menu-->
-							<Button Style="{StaticResource menuButton}" Background="#7B5CD6" Foreground="White">
+							<Button x:Name="dataGridPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
 									<Icon:PackIconMaterial Kind="Menu" Style="{StaticResource menuButtonIcon}"/>
 									<TextBlock Text="Таблица товаров"/>
 								</StackPanel>
 							</Button>
 
-							<Button Style="{StaticResource menuButton}">
+							<Button x:Name="searchPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
 									<Icon:PackIconMaterial Kind="CashMultiple" Style="{StaticResource menuButtonIcon}"/>
 									<TextBlock Text="Поиск товара"/>
 								</StackPanel>
 							</Button>
 
-							<Button Style="{StaticResource menuButton}">
+							<Button x:Name="aboutPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
 									<Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}"/>
 									<TextBlock Text="О программе"/>
@@ -81,7 +76,7 @@
 
 
 			<!--PagesView-->
-			<Grid HorizontalAlignment="Right" Grid.Column="1">
+			<Grid HorizontalAlignment="Center" Grid.Column="1">
 				<Frame x:Name="MainView" >
 					
 				</Frame>
