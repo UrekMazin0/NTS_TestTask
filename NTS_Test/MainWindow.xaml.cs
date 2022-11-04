@@ -26,8 +26,8 @@ namespace NTS_Test
         private DataGridPage _dataGridPage;
         private SearchPage   _searchPage;
         private AboutPage    _aboutPage;
-        private Page _currentPage = null;
 
+        private Page _currentPage = null;
         private Button _currentButton = null;
 
 		public MainWindow()
@@ -42,6 +42,7 @@ namespace NTS_Test
 			var dal = new ProductDAL();
             var data = dal.GetByLimitAsync(100);
 
+            Trace.WriteLine(data.Result[0]);
 			var products = new ObservableCollection<Product>();
 			foreach (var item in data.Result)
 			{

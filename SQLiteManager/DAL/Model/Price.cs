@@ -11,6 +11,7 @@ namespace SQLiteManager.DAL.Model
 		public int     id	 { get; set; }
 		public decimal price { get; set; }
 
+		public ICollection<Product> Products { get; set; }
 		public override string ToString()
 		{
 			return $"{id} : {price}";

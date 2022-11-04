@@ -21,10 +21,12 @@ namespace SQLiteManager.DAL.Model
 		public string   weight   { get; set; }
 		public DateTime date_changes { get; set; }
 
+		public Price Price { get; set; }
+
 		public override string ToString()
 		{
 			return $"{id} : {id_price} : {code} : {name} : {bar_code} : {quantity} : " +
-				   $"{model} : {sort} : {color} : {size} : {weight} : {date_changes}";
+				   $"{model} : {sort} : {color} : {size} : {weight} : {date_changes} : {Price.price}";
 		}
 	}
 }

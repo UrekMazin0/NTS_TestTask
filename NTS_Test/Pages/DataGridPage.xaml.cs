@@ -20,9 +20,22 @@ namespace NTS_Test.Pages
 	/// </summary>
 	public partial class DataGridPage : Page
 	{
+		
 		public DataGridPage()
 		{
 			InitializeComponent();
+		}
+
+		private void nameFilter_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key != Key.Return)
+				return;
+
+			var textBox = sender as TextBox;
+			if (String.IsNullOrEmpty(textBox.Text))
+				return;
+
+
 		}
 	}
 }

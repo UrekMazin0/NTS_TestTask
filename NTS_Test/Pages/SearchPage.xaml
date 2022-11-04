@@ -31,28 +31,28 @@
 				           Panel.ZIndex="1" Text="Filter by name"
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty}" />
 
-				<TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="nameFilter" Style="{StaticResource filterTextBox}"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by code"
                            Visibility="{Binding ElementName=textBoxFilter2, Path=Text.IsEmpty}" />
 
-				<TextBox Name="textBoxFilter2" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="codeFilter" Style="{StaticResource filterTextBox}"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by bar_code"
                            Visibility="{Binding ElementName=textBoxFilter3, Path=Text.IsEmpty}" />
 
-				<TextBox Name="textBoxFilter3" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="barcodeFilter" Style="{StaticResource filterTextBox}"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by price"
                            Visibility="{Binding ElementName=textBoxFilter4, Path=Text.IsEmpty}" />
 
-				<TextBox Name="textBoxFilter4" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="priceFilter" Style="{StaticResource filterTextBox}"/>
 			</Grid>
 		</StackPanel>
 
@@ -70,6 +70,7 @@
 				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="DateChanges" Binding="{Binding date_changes}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 			</DataGrid.Columns>
 		</DataGrid>

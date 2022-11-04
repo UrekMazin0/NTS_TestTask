@@ -89,13 +89,23 @@ namespace SQLiteManager.DAL.Implementation
 
 		public async Task<IReadOnlyList<Product>> GetByLimitAsync(int limit)
 		{
-			var query = $"SELECT * FROM products LIMIT {limit}";
+			var query = $"SELECT * " +
+						$"FROM products pro " +
+						$"INNER JOIN prices pri " +
+						$"ON pro.id_price = pri.id " +
+						$"LIMIT {limit}";
 
 			using (var connection = DBConnection.CreateConnection())
 			{
 				connection.Open();
-				var result = await connection.QueryAsync<Product>(query)
-											 .ConfigureAwait(false);
+
+				var result = await connection.QueryAsync<Product, Price, Product>(query, (product, price) =>
+				{
+					product.Price = price;
+					return product;
+				},
+				splitOn: "id_price")
+				.ConfigureAwait(false);
 
 				return result.AsList<Product>();
 			}

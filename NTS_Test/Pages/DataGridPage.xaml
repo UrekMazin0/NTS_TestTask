@@ -50,7 +50,7 @@
                            Panel.ZIndex="1" Text="Search by name"
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-			<TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}"/>
+			<TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" KeyDown="nameFilter_KeyDown"/>
 		</Grid>
 
 		<!--Products Data Grid-->
@@ -67,6 +67,7 @@
 				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="DateChanges" Binding="{Binding date_changes}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 			</DataGrid.Columns>
 		</DataGrid>
