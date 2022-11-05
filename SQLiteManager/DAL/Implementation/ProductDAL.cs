@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Diagnostics;
 
 namespace SQLiteManager.DAL.Implementation
 {
@@ -106,6 +107,91 @@ namespace SQLiteManager.DAL.Implementation
 				},
 				splitOn: "id_price")
 				.ConfigureAwait(false);
+
+				return result.AsList<Product>();
+			}
+		}
+
+		public async Task<IReadOnlyList<Product>> GetByFilterAsync(string name ="", int code=-1, string bar_code="", decimal price=-1)
+		{
+			var query = $"SELECT * " +
+						$"FROM products pro " +
+						$"INNER JOIN prices pri " +
+						$"ON pro.id_price = pri.id ";
+
+			// если хотя бы один из параметров пришёл заполненный, добавляем блок WHERE
+			if (name != "" || code != -1 || bar_code != "" || price != -1)
+				query += "WHERE ";
+
+
+			bool first = true;
+
+			if(name != "")
+			{
+				if (first)
+				{
+					first = false;
+					query += $" pro.name = \"{name}\"";
+				}
+				else
+				{
+					query += $" AND pro.name = \"{name}\"";
+				}
+			}
+
+			if (code != -1)
+			{
+				if (first)
+				{
+					first = false;
+					query += $"pro.code = \"{code}\"";
+				}
+				else
+				{
+					query += $" AND pro.code = \"{code}\"";
+				}
+			}
+
+			if (bar_code != "")
+			{
+				if (first)
+				{
+					first = false;
+					query += $"pro.bar_code = \"{bar_code}\"";
+				}
+				else
+				{
+					query += $" AND pro.bar_code = \"{bar_code}\"";
+				}
+			}
+
+			if (price != -1)
+			{
+				if (first)
+				{
+					first = false;
+					query += $"pri.price = \"{price}\"";
+				}
+				else
+				{
+					query += $"AND pri.price = \"{price}\"";
+				}
+			}
+
+			query += ";";
+
+			Trace.WriteLine(query);
+
+			using (var connection = DBConnection.CreateConnection())
+			{
+				connection.Open();
+
+				var result = await connection.QueryAsync<Product, Price, Product>(query, (product, pri) =>
+				{
+					product.Price = pri;
+					return product;
+				},
+				splitOn: "id_price");
 
 				return result.AsList<Product>();
 			}

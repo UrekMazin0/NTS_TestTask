@@ -18,6 +18,7 @@ using SQLiteManager.DAL.Implementation;
 using SQLiteManager;
 using SQLiteManager.DAL.Model;
 using NTS_Test.Pages;
+using NTS_Test.DataManager;
 
 namespace NTS_Test
 {
@@ -30,29 +31,25 @@ namespace NTS_Test
         private Page _currentPage = null;
         private Button _currentButton = null;
 
+        private DataAccessManager _dataManager;
+
 		public MainWindow()
 		{
 			InitializeComponent();
             LoadContent();
 
+            _dataManager = new DataAccessManager();
+
+            EventSlotsConnections();
+
             SwitchSelectedButton(dataGridPageSwitchButton);
             SwitchFrame(_dataGridPage);
             MainView.Content = _currentPage;
 
-			var dal = new ProductDAL();
-            var data = dal.GetByLimitAsync(100);
-
-            Trace.WriteLine(data.Result[0]);
-			var products = new ObservableCollection<Product>();
-			foreach (var item in data.Result)
-			{
-                products.Add(item);
-			}
-
-			_dataGridPage.productsDataGrid.ItemsSource = products;
+            _dataManager.GetByLimit(100);
 		}
 
-        private bool IsMaximize = false;
+		private bool IsMaximize = false;
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -127,6 +124,14 @@ namespace NTS_Test
             _searchPage = new SearchPage();
             _aboutPage = new AboutPage();
 		}
+
+        private void EventSlotsConnections()
+        {
+            _dataManager.dataUpdate += _dataGridPage.DataUpdateEventHandler;
+            _dataManager.dataUpdate += _searchPage.DataUpdateEventHandler;
+            _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
+            _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
+        }
 
         private void SwitchSelectedButton(Button b)
         {

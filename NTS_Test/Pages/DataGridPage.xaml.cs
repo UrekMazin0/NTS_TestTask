@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NTS_Test.DataManager;
+
 namespace NTS_Test.Pages
 {
-	/// <summary>
-	/// Interaction logic for DataGridPage.xaml
-	/// </summary>
 	public partial class DataGridPage : Page
 	{
-		
+		public event EventHandler<FilterUpdateEventArgs> filterUpdate;
+
 		public DataGridPage()
 		{
 			InitializeComponent();
@@ -32,10 +32,25 @@ namespace NTS_Test.Pages
 				return;
 
 			var textBox = sender as TextBox;
-			if (String.IsNullOrEmpty(textBox.Text))
+			if (sender == null)
 				return;
 
+			FilterUpdateEventArgs args = new FilterUpdateEventArgs
+			{
+				name = textBox.Text,
+				code = -1,
+				bar_code = "",
+				price = -1
+			};
 
+			EventHandler<FilterUpdateEventArgs> handler = filterUpdate;
+			if (handler != null)
+				handler(this, args);
+		}
+
+		public void DataUpdateEventHandler(object sender, DataUpdateEventArgs e)
+		{
+			productsDataGrid.ItemsSource = e.products;
 		}
 	}
 }

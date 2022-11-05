@@ -9,6 +9,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SearchPage">
 
+	<Page.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVis" />
+	</Page.Resources>
+
 	<!--Search Menu-->
 	<Grid Grid.Column="1" Margin="30 20 20 20">
 		<Grid.RowDefinitions>
@@ -29,30 +33,30 @@
 			<Grid HorizontalAlignment="Left">
 				<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
 				           Panel.ZIndex="1" Text="Filter by name"
-                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty}" />
+                           Visibility="{Binding ElementName=nameFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="nameFilter" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="nameFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by code"
-                           Visibility="{Binding ElementName=textBoxFilter2, Path=Text.IsEmpty}" />
+                           Visibility="{Binding ElementName=codeFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="codeFilter" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="codeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by bar_code"
-                           Visibility="{Binding ElementName=textBoxFilter3, Path=Text.IsEmpty}" />
+                           Visibility="{Binding ElementName=barcodeFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="barcodeFilter" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="barcodeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by price"
-                           Visibility="{Binding ElementName=textBoxFilter4, Path=Text.IsEmpty}" />
+                           Visibility="{Binding ElementName=priceFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="priceFilter" Style="{StaticResource filterTextBox}"/>
+				<TextBox Name="priceFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
 			</Grid>
 		</StackPanel>
 

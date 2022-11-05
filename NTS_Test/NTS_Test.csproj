@@ -96,12 +96,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataManager\DataManager.cs" />
+    <Compile Include="DataManager\DataAccessManager.cs" />
+    <Compile Include="DataManager\DataUpdateEventArgs.cs" />
+    <Compile Include="DataManager\FilterUpdateEventArgs.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +123,9 @@
   <ItemGroup>
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddPage.xaml.cs">
+      <DependentUpon>AddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
