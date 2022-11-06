@@ -27,6 +27,7 @@ namespace NTS_Test
         private DataGridPage _dataGridPage;
         private SearchPage   _searchPage;
         private AboutPage    _aboutPage;
+        private AddPage      _addPage;
 
         private Page _currentPage = null;
         private Button _currentButton = null;
@@ -49,7 +50,82 @@ namespace NTS_Test
             _dataManager.GetByLimit(100);
 		}
 
-		private bool IsMaximize = false;
+        private void SwitchFrame_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button == _currentButton || button == null)
+                return;
+
+            SwitchSelectedButton(button);
+
+            switch (button.Name)
+			{
+                case "dataGridPageSwitchButton":
+                    SwitchFrame(_dataGridPage);
+                    break;
+                case "searchPageSwitchButton":
+                    SwitchFrame(_searchPage);
+                    break;
+                case "aboutPageSwitchButton":
+                    SwitchFrame(_aboutPage);
+                    break;
+                case "addPageSwitchButton":
+                    SwitchFrame(_addPage);
+                    break;
+                default:
+					break;
+			}
+		}
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+            Application.Current.Shutdown();
+        }
+
+        private void SwitchFrame(Page page)
+        {
+            if (_currentPage == page)
+                return;
+
+            _currentPage = page;
+            MainView.Content = _currentPage;
+		}
+
+        private void LoadContent()
+        {
+            _dataGridPage = new DataGridPage();
+            _searchPage = new SearchPage();
+            _aboutPage = new AboutPage();
+            _addPage = new AddPage();
+		}
+
+        private void EventSlotsConnections()
+        {
+            _dataManager.dataUpdate += _dataGridPage.DataUpdateEventHandler;
+            _dataManager.dataUpdate += _searchPage.DataUpdateEventHandler;
+            _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
+            _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
+        }
+
+        private void SwitchSelectedButton(Button b)
+        {
+            if (b == null)
+                return;
+
+            if (_currentButton != null)
+            {
+                _currentButton.Background = Brushes.Transparent;
+                _currentButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD0, 0xC0, 0xFF)); // #D0C0FF
+            }
+
+            _currentButton = b;
+
+            _currentButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x7B, 0x5C, 0xD6)); // #7B5CD6
+            _currentButton.Foreground = Brushes.White;
+        }
+
+        private bool IsMaximize = false;
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -78,76 +154,5 @@ namespace NTS_Test
                 this.DragMove();
             }
         }
-
-        private void SwitchFrame_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-
-            if (button == _currentButton || button == null)
-                return;
-
-            SwitchSelectedButton(button);
-
-            switch (button.Name)
-			{
-                case "dataGridPageSwitchButton":
-                    SwitchFrame(_dataGridPage);
-                    break;
-                case "searchPageSwitchButton":
-                    SwitchFrame(_searchPage);
-                    break;
-                case "aboutPageSwitchButton":
-                    SwitchFrame(_aboutPage);
-                    break;
-                default:
-					break;
-			}
-		}
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-		{
-            Application.Current.Shutdown();
-        }
-
-        private void SwitchFrame(Page page)
-        {
-            if (_currentPage == page)
-                return;
-
-            _currentPage = page;
-            MainView.Content = _currentPage;
-		}
-
-        private void LoadContent()
-        {
-            _dataGridPage = new DataGridPage();
-            _searchPage = new SearchPage();
-            _aboutPage = new AboutPage();
-		}
-
-        private void EventSlotsConnections()
-        {
-            _dataManager.dataUpdate += _dataGridPage.DataUpdateEventHandler;
-            _dataManager.dataUpdate += _searchPage.DataUpdateEventHandler;
-            _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
-            _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
-        }
-
-        private void SwitchSelectedButton(Button b)
-        {
-            if (b == null)
-                return;
-
-            if (_currentButton != null)
-            {
-                _currentButton.Background = Brushes.Transparent;
-                _currentButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xD0, 0xC0, 0xFF)); // #D0C0FF
-            }
-
-            _currentButton = b;
-
-            _currentButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x7B, 0x5C, 0xD6)); // #7B5CD6
-            _currentButton.Foreground = Brushes.White;
-        }
-	}
+    }
 }

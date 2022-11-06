@@ -18,7 +18,7 @@ namespace SQLiteManager.DAL.Model
 		public string   sort     { get; set; }
 		public string   color    { get; set; }
 		public string   size     { get; set; }
-		public string   weight   { get; set; }
+		public decimal  weight   { get; set; }
 		public DateTime date_changes { get; set; }
 
 		public Price Price { get; set; }

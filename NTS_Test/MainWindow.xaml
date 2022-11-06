@@ -51,6 +51,13 @@
 								</StackPanel>
 							</Button>
 
+							<Button x:Name="addPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
+								<StackPanel Orientation="Horizontal">
+									<Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}"/>
+									<TextBlock Text="Добавить товар"/>
+								</StackPanel>
+							</Button>
+							
 							<Button x:Name="aboutPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
 									<Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}"/>

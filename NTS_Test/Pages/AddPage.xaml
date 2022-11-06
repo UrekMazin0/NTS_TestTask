@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:NTS_Test.Pages"
-	  
+	  xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddPage">
@@ -28,8 +28,111 @@
 		<!--Seprator-->
 		<Separator Height="1" Grid.Row="2" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
-		
+		<Grid Grid.Row="3" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="250"/>
+				<ColumnDefinition Width="250"/>
+				<ColumnDefinition Width="200"/>
+			</Grid.ColumnDefinitions>
 			
+			<StackPanel Grid.Column="0" Orientation="Vertical">
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter name"
+                           Visibility="{Binding ElementName=nameBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="nameBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter code"
+                           Visibility="{Binding ElementName=codeBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="codeBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter bar_code"
+                           Visibility="{Binding ElementName=barcodeBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="barcodeBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter quantity"
+                           Visibility="{Binding ElementName=quantityBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="quantityBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter model"
+                           Visibility="{Binding ElementName=modelBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="modelBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter sort"
+                           Visibility="{Binding ElementName=sortBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="sortBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+			</StackPanel>
+
+			<StackPanel Grid.Column="1" Orientation="Vertical">
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter color"
+                           Visibility="{Binding ElementName=colorBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="colorBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter size"
+                           Visibility="{Binding ElementName=sizeBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="sizeBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter weight"
+                           Visibility="{Binding ElementName=weightBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="weightBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+				<Grid HorizontalAlignment="Left" MinWidth="200">
+					<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+				           Panel.ZIndex="1" Text="Enter price"
+                           Visibility="{Binding ElementName=priceBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+					<TextBox Name="priceBox" Style="{StaticResource filterTextBox}" />
+				</Grid>
+
+			</StackPanel>
+
+			<Grid Grid.Column="2" VerticalAlignment="Top">
+				<Button Style="{StaticResource addButton}" Click="AddButton_Click">
+					<StackPanel Orientation="Horizontal">
+						<Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11"/>
+						<TextBlock Text="Add Product"/>
+					</StackPanel>
+				</Button>
+			</Grid>
+		</Grid>
+
 
 	</Grid>
 </Page>

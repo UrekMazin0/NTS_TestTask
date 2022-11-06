@@ -14,8 +14,10 @@ namespace SQLiteManager.DAL.Implementation
 	{
 		public async Task<int> AddAsync(Product entity)
 		{
-			var query = $"INSERT INTO products(code, name, bar_code, quantity, model, sort, color, size, weight, date_changes, id_price)" +
-						$"VALUES (@code, @name, @bar_code, @quantity, @model, @sort, @color, @size, @weight, DATETIME('now'), @id_price);";
+			var query = $"INSERT INTO products(code, name, bar_code, quantity, model, sort, color, size, weight, date_changes, id_price) " +
+						$"VALUES (@code, @name, @bar_code, @quantity, @model, @sort, @color, @size, @weight, DATETIME(\'now\'), @id_price);";
+
+			Trace.WriteLine(query);
 
 			using (var connection = DBConnection.CreateConnection())
 			{

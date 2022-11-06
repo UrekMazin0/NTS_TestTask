@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Diagnostics;
 
 namespace SQLiteManager.DAL.Implementation
 {
@@ -82,6 +83,37 @@ namespace SQLiteManager.DAL.Implementation
 											 .ConfigureAwait(false);
 
 				return result;
+			}
+		}
+
+		public async Task<bool> Exist(Price entity)
+		{
+			var query = "SELECT count(1) FROM prices WHERE price=@price";
+			
+			using(var connection = DBConnection.CreateConnection())
+			{
+				connection.Open();
+				var exist = await connection.ExecuteScalarAsync<bool>(query, entity).ConfigureAwait(false);
+				
+				return exist;
+			}
+		}
+
+		public async Task<int> GetIdIfExistAsync(Price entity)
+		{
+			var exist = await Exist(entity);
+			if (!exist)
+			{
+				
+				return -1;
+			}
+			var query = "SELECT id FROM prices WHERE price=@price";
+			using (var connection = DBConnection.CreateConnection())
+			{
+				connection.Open();
+				var result = await connection.QuerySingleOrDefaultAsync<Price>(query, entity);
+
+				return result.id;
 			}
 		}
 	}
