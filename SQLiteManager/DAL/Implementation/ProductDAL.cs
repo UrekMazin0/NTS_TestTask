@@ -17,8 +17,6 @@ namespace SQLiteManager.DAL.Implementation
 			var query = $"INSERT INTO products(code, name, bar_code, quantity, model, sort, color, size, weight, date_changes, id_price) " +
 						$"VALUES (@code, @name, @bar_code, @quantity, @model, @sort, @color, @size, @weight, DATETIME(\'now\'), @id_price);";
 
-			Trace.WriteLine(query);
-
 			using (var connection = DBConnection.CreateConnection())
 			{
 				connection.Open();
@@ -181,8 +179,6 @@ namespace SQLiteManager.DAL.Implementation
 			}
 
 			query += ";";
-
-			Trace.WriteLine(query);
 
 			using (var connection = DBConnection.CreateConnection())
 			{

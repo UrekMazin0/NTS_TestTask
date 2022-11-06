@@ -95,15 +95,16 @@ namespace NTS_Test
         private void LoadContent()
         {
             _dataGridPage = new DataGridPage();
-            _searchPage = new SearchPage();
-            _aboutPage = new AboutPage();
-            _addPage = new AddPage();
+            _searchPage   = new SearchPage();
+            _aboutPage    = new AboutPage();
+            _addPage      = new AddPage();
 		}
 
         private void EventSlotsConnections()
         {
             _dataManager.dataUpdate += _dataGridPage.DataUpdateEventHandler;
             _dataManager.dataUpdate += _searchPage.DataUpdateEventHandler;
+
             _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
             _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
         }
