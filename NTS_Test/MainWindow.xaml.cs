@@ -107,9 +107,10 @@ namespace NTS_Test
             _dataManager.dataUpdate += _searchPage.DataUpdateEventHandler;
 
             _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
-            _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
-
             _dataGridPage.entityUpdate += _dataManager.EntityUpdateEventHandler;
+            _dataGridPage.entityDelete += _dataManager.EntityDeleteEventHandler;
+
+            _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
         }
 
         private void SwitchSelectedButton(Button b)

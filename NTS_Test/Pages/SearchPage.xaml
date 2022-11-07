@@ -35,28 +35,28 @@
 				           Panel.ZIndex="1" Text="Filter by name"
                            Visibility="{Binding ElementName=nameFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="nameFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
+				<TextBox Name="nameFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" MinWidth="100" MaxWidth="150" Margin="10 10 10 10"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by code"
                            Visibility="{Binding ElementName=codeFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="codeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
+				<TextBox Name="codeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" MinWidth="100" MaxWidth="150" Margin="10 10 10 10"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by bar_code"
                            Visibility="{Binding ElementName=barcodeFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="barcodeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
+				<TextBox Name="barcodeFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" MinWidth="100" MaxWidth="150" Margin="10 10 10 10"/>
 			</Grid>
 			<Grid HorizontalAlignment="Right">
 				<TextBlock Margin="15 0" VerticalAlignment	="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Filter by price"
                            Visibility="{Binding ElementName=priceFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-				<TextBox Name="priceFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" />
+				<TextBox Name="priceFilter" Style="{StaticResource filterTextBox}" KeyDown="Filters_KeyDown" MinWidth="100" MaxWidth="150" Margin="10 10 10 10"/>
 			</Grid>
 		</StackPanel>
 

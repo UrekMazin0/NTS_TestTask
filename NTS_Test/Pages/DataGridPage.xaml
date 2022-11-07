@@ -48,7 +48,7 @@
 		</Grid>
 
 		<!--Products Data Grid-->
-		<DataGrid x:Name ="productsDataGrid" Grid.Row="5" AutoGenerateColumns="False" CellEditEnding="productsDataGrid_CellEditEnding" 
+		<DataGrid x:Name ="productsDataGrid" Grid.Row="5" AutoGenerateColumns="False" CellEditEnding="productsDataGrid_CellEditEnding"
 				  RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
 			<!-- Code Name BarCode Quantity Model Sort Color Size Weight DateChanges-->
 			<DataGrid.Columns>
@@ -63,6 +63,17 @@
 				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="False" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="DateChanges" Binding="{Binding date_changes}" IsReadOnly="True" Width="*" CanUserResize="False"/>
+
+				<DataGridTemplateColumn Header="Delete" IsReadOnly="True" Width="auto">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" MaxWidth="50" Click="Button_Click">
+								<Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+							</Button>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				
 			</DataGrid.Columns>
 		</DataGrid>
 

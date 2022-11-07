@@ -99,11 +99,27 @@ namespace NTS_Test.DataManager
 					break;
 			}
 
-			Trace.WriteLine(product);
-			
 			var result = await _productDAL.UpdateAsync(product);
-			
-			Trace.WriteLine($"ROWS: {result}");
+		}
+
+		public async void EntityDeleteEventHandler(object sender, EntityDeleteEventArgs e)
+		{
+			_ = await _productDAL.DeleteAsync(e.id);
+
+			for (int i = 0; i < _currentProducts.Count; i++)
+			{
+				if (_currentProducts[i].id == e.id)
+				{
+					_currentProducts.RemoveAt(i);
+				}
+			}
+
+			var args = new DataUpdateEventArgs { products = _currentProducts };
+
+			EventHandler<DataUpdateEventArgs> handler = dataUpdate;
+			if (handler != null)
+				handler(this, args);
+
 		}
 	}
 }

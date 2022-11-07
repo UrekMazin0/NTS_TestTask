@@ -23,6 +23,7 @@ namespace NTS_Test.Pages
 	{
 		public event EventHandler<FilterUpdateEventArgs> filterUpdate;
 		public event EventHandler<EntityUpdateEventArgs> entityUpdate;
+		public event EventHandler<EntityDeleteEventArgs> entityDelete;
 
 		public DataGridPage()
 		{
@@ -55,7 +56,9 @@ namespace NTS_Test.Pages
 		public void DataUpdateEventHandler(object sender, DataUpdateEventArgs e)
 		{
 			productsTitle.Text = $"{e.products.Count} товаров";
+			productsDataGrid.ItemsSource = null;
 			productsDataGrid.ItemsSource = e.products;
+			productsDataGrid.Items.Refresh();
 		}
 
 		private void productsDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -84,21 +87,20 @@ namespace NTS_Test.Pages
 				handler(this, args);
 		}
 
-		private DataGridRow GetRow(int index)
+		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			DataGridRow row = (DataGridRow)productsDataGrid.ItemContainerGenerator.ContainerFromIndex(index);
-			if (row == null)
-			{
-				productsDataGrid.UpdateLayout();
-				productsDataGrid.ScrollIntoView(productsDataGrid.Items[index]);
-				row = (DataGridRow)productsDataGrid.ItemContainerGenerator.ContainerFromIndex(index);
-			}
-			return row;
-		}
+			var rowIndex = productsDataGrid.SelectedIndex;
+			if (rowIndex == -1)
+				return;
 
-		private void AddButton_Click(object sender, RoutedEventArgs e)
-		{
+			Product p = (Product)productsDataGrid.Items[rowIndex];
 
+			var args = new EntityDeleteEventArgs { id = p.id };
+
+			EventHandler<EntityDeleteEventArgs> handler = entityDelete;
+
+			if (handler != null)
+				handler(this, args);
 		}
 	}
 }
