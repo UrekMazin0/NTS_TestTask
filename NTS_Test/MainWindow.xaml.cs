@@ -48,6 +48,7 @@ namespace NTS_Test
             MainView.Content = _currentPage;
 
             _dataManager.GetByLimit(100);
+
 		}
 
         private void SwitchFrame_Click(object sender, RoutedEventArgs e)
@@ -107,6 +108,8 @@ namespace NTS_Test
 
             _dataGridPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
             _searchPage.filterUpdate += _dataManager.FilterUpdateEventHandler;
+
+            _dataGridPage.entityUpdate += _dataManager.EntityUpdateEventHandler;
         }
 
         private void SwitchSelectedButton(Button b)
@@ -134,7 +137,7 @@ namespace NTS_Test
                 if (IsMaximize)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.Width = 1080;
+                    this.Width = 1366;
                     this.Height = 720;
 
                     IsMaximize = false;

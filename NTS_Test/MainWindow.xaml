@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
 		xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-		Height="720" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+		Height="720" Width="1366" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
 		Background="Transparent" WindowStyle="None">
 
 	<Window.Resources>
@@ -46,14 +46,14 @@
 
 							<Button x:Name="searchPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
-									<Icon:PackIconMaterial Kind="CashMultiple" Style="{StaticResource menuButtonIcon}"/>
+									<Icon:PackIconMaterial Kind="TableSearch" Style="{StaticResource menuButtonIcon}"/>
 									<TextBlock Text="Поиск товара"/>
 								</StackPanel>
 							</Button>
 
 							<Button x:Name="addPageSwitchButton" Style="{StaticResource menuButton}" Click="SwitchFrame_Click">
 								<StackPanel Orientation="Horizontal">
-									<Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}"/>
+									<Icon:PackIconMaterial Kind="Plus" Style="{StaticResource menuButtonIcon}"/>
 									<TextBlock Text="Добавить товар"/>
 								</StackPanel>
 							</Button>

@@ -28,19 +28,13 @@
 		<TextBlock Text="Товары" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left"/>
 
 		<!--Add Button-->
-		<Button Style="{StaticResource addButton}">
-			<StackPanel Orientation="Horizontal">
-				<Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11"/>
-				<TextBlock Text="Add new Product"/>
-			</StackPanel>
-		</Button>
 
 		<!--Seprator-->
 		<Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
 
 		<!--Counter Title-->
-		<TextBlock Text="68 Club Staff" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+		<TextBlock x:Name="productsTitle" Text="---" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 		<TextBlock Text="Filter by name" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
@@ -54,19 +48,19 @@
 		</Grid>
 
 		<!--Products Data Grid-->
-		<DataGrid x:Name ="productsDataGrid" Grid.Row="5" AutoGenerateColumns="False" 
+		<DataGrid x:Name ="productsDataGrid" Grid.Row="5" AutoGenerateColumns="False" CellEditEnding="productsDataGrid_CellEditEnding" 
 				  RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
 			<!-- Code Name BarCode Quantity Model Sort Color Size Weight DateChanges-->
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Code" Binding="{Binding code}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="BarCode" Binding="{Binding bar_code}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Model" Binding="{Binding model}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Sort" Binding="{Binding sort}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Code" Binding="{Binding code}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="BarCode" Binding="{Binding bar_code}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Model" Binding="{Binding model}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Sort" Binding="{Binding sort}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="False" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="DateChanges" Binding="{Binding date_changes}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 			</DataGrid.Columns>

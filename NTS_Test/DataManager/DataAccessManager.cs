@@ -40,7 +40,6 @@ namespace NTS_Test.DataManager
 
 		public void GetByLimit(int limit)
 		{
-			Trace.WriteLine("GOVNO");
 			_currentProducts = (List<Product>)_productDAL.GetByLimitAsync(limit).Result;
 
 			var args = new DataUpdateEventArgs { products = _currentProducts };
@@ -52,11 +51,10 @@ namespace NTS_Test.DataManager
 
 		public async void FilterUpdateEventHandler(object sender, FilterUpdateEventArgs e)
 		{
-			var result = await _productDAL.GetByFilterAsync(name    : e.name,
-															code    : e.code, 
+			var result = await _productDAL.GetByFilterAsync(name: e.name,
+															code: e.code,
 															bar_code: e.bar_code,
-															price   : e.price)
-															.ConfigureAwait(false);
+															price: e.price);
 
 			_currentProducts = (List<Product>)result;
 
@@ -65,6 +63,47 @@ namespace NTS_Test.DataManager
 			EventHandler<DataUpdateEventArgs> handler = dataUpdate;
 			if (handler != null)
 				handler(this, args);
+		}
+
+		public async void EntityUpdateEventHandler(object sender, EntityUpdateEventArgs e)
+		{
+			var product = e.product;
+
+			switch (e.fieldName)
+			{
+				case "name":
+					product.name = e.value;
+					break;
+				case "code":
+					product.code = Int32.Parse(e.value);
+					break;
+				case "barcode":
+					product.bar_code = e.value;
+					break;
+				case "quantity":
+					product.quantity = Decimal.Parse(e.value);
+					break;
+				case "sort":
+					product.sort = e.value;
+					break;
+				case "color":
+					product.color = e.value;
+					break;
+				case "size":
+					product.size = e.value;
+					break;
+				case "weight":
+					product.weight = Decimal.Parse(e.value);
+					break;
+				default:
+					break;
+			}
+
+			Trace.WriteLine(product);
+			
+			var result = await _productDAL.UpdateAsync(product);
+			
+			Trace.WriteLine($"ROWS: {result}");
 		}
 	}
 }

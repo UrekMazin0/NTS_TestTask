@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NTS_Test.DataManager
 {
-	public class FilterUpdateEventArgs
+	public class FilterUpdateEventArgs : EventArgs
 	{
 		public string  name		{ get; set; }
 		public int     code		{ get; set; }

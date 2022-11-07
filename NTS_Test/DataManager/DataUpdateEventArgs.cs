@@ -8,7 +8,7 @@ using SQLiteManager.DAL.Model;
 
 namespace NTS_Test.DataManager
 {
-	public class DataUpdateEventArgs
+	public class DataUpdateEventArgs : EventArgs
 	{
 		public List<Product> products { get; set; }
 	}

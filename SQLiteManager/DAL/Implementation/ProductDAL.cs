@@ -19,7 +19,7 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
-				connection.Open();
+				await connection.OpenAsync();
 				var result = await connection.ExecuteAsync(query, entity)
 											 .ConfigureAwait(false);
 
@@ -34,6 +34,7 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
+				await connection.OpenAsync();
 				var result = await connection.ExecuteAsync(query, new { id = id })
 											 .ConfigureAwait(false);
 
@@ -47,6 +48,8 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
+				await connection.OpenAsync();	
+
 				var result = await connection.QueryAsync<Product>(query)
 											 .ConfigureAwait(false);
 
@@ -60,7 +63,7 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
-				connection.Open();
+				await connection.OpenAsync();
 				var result = await connection.QuerySingleOrDefaultAsync<Product>(query, new { Id = id })
 											 .ConfigureAwait(false);
 
@@ -75,12 +78,15 @@ namespace SQLiteManager.DAL.Implementation
 		{
 			var query = $"UPDATE products " +
 						$"SET code = @code, name = @name, bar_code = @bar_code, quantity = @quantity, model = @model, sort = @sort, color = @color, " +
-						$"	  size = @size, weight = @weight, date_changes = DATETIME('now'), id_price = @id_price "+
+						$"size = @size, weight = @weight, date_changes = DATETIME(\'now\'), id_price = @id_price "+
 						$"WHERE id = @id;";
+
+			Trace.WriteLine(query);
+			Trace.WriteLine(entity.id_price);
 
 			using (var connection = DBConnection.CreateConnection())
 			{
-				connection.Open();
+				await connection.OpenAsync();
 				var result = await connection.ExecuteAsync(query, entity)
 											 .ConfigureAwait(false);
 
@@ -98,11 +104,12 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
-				connection.Open();
+				await connection.OpenAsync();
 
 				var result = await connection.QueryAsync<Product, Price, Product>(query, (product, price) =>
 				{
 					product.Price = price;
+					product.id_price = product.Price.id;
 					return product;
 				},
 				splitOn: "id_price")
@@ -131,11 +138,11 @@ namespace SQLiteManager.DAL.Implementation
 				if (first)
 				{
 					first = false;
-					query += $" pro.name = \"{name}\"";
+					query += $" pro.name = \'{name}\'";
 				}
 				else
 				{
-					query += $" AND pro.name = \"{name}\"";
+					query += $" AND pro.name = \'{name}\'";
 				}
 			}
 
@@ -144,11 +151,11 @@ namespace SQLiteManager.DAL.Implementation
 				if (first)
 				{
 					first = false;
-					query += $"pro.code = \"{code}\"";
+					query += $"pro.code = \'{code}\'";
 				}
 				else
 				{
-					query += $" AND pro.code = \"{code}\"";
+					query += $" AND pro.code = \'{code}\'";
 				}
 			}
 
@@ -157,11 +164,11 @@ namespace SQLiteManager.DAL.Implementation
 				if (first)
 				{
 					first = false;
-					query += $"pro.bar_code = \"{bar_code}\"";
+					query += $"pro.bar_code = \'{bar_code}\'";
 				}
 				else
 				{
-					query += $" AND pro.bar_code = \"{bar_code}\"";
+					query += $" AND pro.bar_code = \'{bar_code}\'";
 				}
 			}
 
@@ -170,11 +177,11 @@ namespace SQLiteManager.DAL.Implementation
 				if (first)
 				{
 					first = false;
-					query += $"pri.price = \"{price}\"";
+					query += $"pri.price = \'{price}\'";
 				}
 				else
 				{
-					query += $"AND pri.price = \"{price}\"";
+					query += $"AND pri.price = \'{price}\'";
 				}
 			}
 
@@ -182,11 +189,12 @@ namespace SQLiteManager.DAL.Implementation
 
 			using (var connection = DBConnection.CreateConnection())
 			{
-				connection.Open();
+				await connection.OpenAsync();
 
 				var result = await connection.QueryAsync<Product, Price, Product>(query, (product, pri) =>
 				{
 					product.Price = pri;
+					product.id_price = product.Price.id;
 					return product;
 				},
 				splitOn: "id_price");
