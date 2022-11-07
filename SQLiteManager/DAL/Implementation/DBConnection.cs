@@ -24,7 +24,9 @@ namespace SQLiteManager.DAL.Implementation
 					dbFile = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
 							 Path.DirectorySeparatorChar + "database" + Path.DirectorySeparatorChar + "ntsDB.db";
 				return dbFile;
-#else
+
+#else // release
+
 				if (dbFile == null)
 					dbFile = "database" + Path.DirectorySeparatorChar + "ntsDB.db";
 				return dbFile;
