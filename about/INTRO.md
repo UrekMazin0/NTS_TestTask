@@ -18,7 +18,7 @@
 - Aero2 Icons
 
 ---
-[!title](./images/productTable.PNG)
+[!Application](https://github.com/UrekMazin0/NTS_TestTask/blob/main/about/images/productTable.PNG)
 Общий вид приложения выглядит примерно так. Слево -- меню, с страницами 
 - Таблица товаров 
 - Поиск товара
