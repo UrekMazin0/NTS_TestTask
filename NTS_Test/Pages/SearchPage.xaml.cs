@@ -1,4 +1,5 @@
 ﻿using NTS_Test.DataManager;
+using SQLiteManager.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace NTS_Test.Pages
 	public partial class SearchPage : Page
 	{
 		public event EventHandler<FilterUpdateEventArgs> filterUpdate;
+		public event EventHandler<EntityUpdateEventArgs> entityUpdate;
 
 		public SearchPage()
 		{
@@ -47,6 +49,32 @@ namespace NTS_Test.Pages
 		public void DataUpdateEventHandler(object sender, DataUpdateEventArgs e)
 		{
 			productsDataGrid.ItemsSource = e.products;
+		}
+
+		private void productsDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+		{
+			if (e.EditAction != DataGridEditAction.Commit)
+				return;
+
+			var column = e.Column as DataGridBoundColumn;
+
+			var bindingPath = (column.Binding as Binding).Path.Path;
+			int rowIndex = e.Row.GetIndex();
+			var element = e.EditingElement as TextBox;
+
+			Product p = (Product)productsDataGrid.Items[rowIndex];
+
+			EntityUpdateEventArgs args = new EntityUpdateEventArgs
+			{
+				index = rowIndex,
+				fieldName = bindingPath,
+				value = element.Text,
+				product = p
+			};
+			EventHandler<EntityUpdateEventArgs> handler = entityUpdate;
+
+			if (handler != null)
+				handler(this, args);
 		}
 	}
 }

@@ -95,6 +95,10 @@ namespace NTS_Test.DataManager
 				case "weight":
 					product.weight = Decimal.Parse(e.value);
 					break;
+				case "Price.price":
+					product.Price = new Price { price = Decimal.Parse(e.value) };
+					product.id_price = await _priceDAL.GetIdCreateIfNotExistAsync(product.Price);
+					break;
 				default:
 					break;
 			}

@@ -81,9 +81,6 @@ namespace SQLiteManager.DAL.Implementation
 						$"size = @size, weight = @weight, date_changes = DATETIME(\'now\'), id_price = @id_price "+
 						$"WHERE id = @id;";
 
-			Trace.WriteLine(query);
-			Trace.WriteLine(entity.id_price);
-
 			using (var connection = DBConnection.CreateConnection())
 			{
 				await connection.OpenAsync();

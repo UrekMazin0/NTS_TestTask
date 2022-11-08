@@ -61,20 +61,20 @@
 		</StackPanel>
 
 		<!--Products Data Grid-->
-		<DataGrid x:Name ="productsDataGrid" Grid.Row="4" AutoGenerateColumns="False" 
+		<DataGrid x:Name ="productsDataGrid" Grid.Row="4" AutoGenerateColumns="False" CellEditEnding="productsDataGrid_CellEditEnding"
 				  RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
 			<!-- Code Name BarCode Quantity Model Sort Color Size Weight DateChanges-->
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Code" Binding="{Binding code}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="BarCode" Binding="{Binding bar_code}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Model" Binding="{Binding model}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Sort" Binding="{Binding sort}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="*" CanUserResize="False"/>
-				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="True" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Code" Binding="{Binding code}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Name" Binding="{Binding name}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="BarCode" Binding="{Binding bar_code}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Model" Binding="{Binding model}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Sort" Binding="{Binding sort}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Color" Binding="{Binding color}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Size" Binding="{Binding size}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="False" Width="*" CanUserResize="False"/>
+				<DataGridTextColumn Header="Price" Binding="{Binding Price.price}" IsReadOnly="False" Width="*" CanUserResize="False"/>
 				<DataGridTextColumn Header="DateChanges" Binding="{Binding date_changes}" IsReadOnly="True" Width="*" CanUserResize="False"/>
 			</DataGrid.Columns>
 		</DataGrid>

@@ -1,4 +1,4 @@
-﻿using SQLiteManager.DAL.Interfaces;
+﻿	using SQLiteManager.DAL.Interfaces;
 using SQLiteManager.DAL.Model;
 using System;
 using System.Collections.Generic;
@@ -99,14 +99,37 @@ namespace SQLiteManager.DAL.Implementation
 			}
 		}
 
+		public async Task<int> GetIdCreateIfNotExistAsync(Price entity)
+		{
+			using(var connection = DBConnection.CreateConnection())
+			{
+				connection.Open();
+
+				var exist = await connection.ExecuteScalarAsync<bool>("SELECT count(1) FROM prices WHERE price=@price", entity)
+											.ConfigureAwait(false);
+
+				if(!exist)
+				{
+					_ = await connection.ExecuteAsync("INSERT INTO prices (price) VALUES (@price);", entity)
+										.ConfigureAwait(false);
+
+					
+				}
+
+				var result = await connection.QuerySingleOrDefaultAsync<Price>("SELECT id FROM prices WHERE price=@price", entity)
+											 .ConfigureAwait(false);
+
+				return result.id;
+
+			}
+		}
+
 		public async Task<int> GetIdIfExistAsync(Price entity)
 		{
 			var exist = await Exist(entity);
 			if (!exist)
-			{
-				
 				return -1;
-			}
+
 			var query = "SELECT id FROM prices WHERE price=@price";
 			using (var connection = DBConnection.CreateConnection())
 			{

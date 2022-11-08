@@ -74,6 +74,7 @@ namespace NTS_Test.Pages
 
 			Product p = (Product)productsDataGrid.Items[rowIndex];
 
+			Trace.WriteLine($"bindingPath : {bindingPath}");
 			EntityUpdateEventArgs args = new EntityUpdateEventArgs
 			{
 				index = rowIndex,
